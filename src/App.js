@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import './App.css'
+import classes from './App.css'
 import Person from './Person/Person'
-import Radium, {StyleRoot } from 'radium'
 
 class App extends Component {
   state = {
@@ -43,20 +42,8 @@ class App extends Component {
    }
 
   render() {
-    const style = {
-      backgroundColor:'green',
-      color:'white',
-      font:'inherit',
-      border:'1px solid red',
-      padding:'8px',
-      cursor:'pointer',
-      ':hover': {
-        backgroundColor:'lightgreen',
-        color:'black'
-      }
-    }
-
     let persons = null;
+    let buttonClass = ''
 
     if(this.state.showPerson){
       persons = (<div>
@@ -70,35 +57,30 @@ class App extends Component {
         })}
       </div>)
 
-      style.backgroundColor = 'red'
-      style[':hover'] =  {
-        backgroundColor:'white',
-        color:'red'
-      }
+      buttonClass = classes.red
+      
     }
 
-    let classes = []
+    let classesArray = []
 
     if(this.state.persons.length <= 2 ){
-     classes.push('red')
+      classesArray.push(classes.red)
     } 
 
     if(this.state.persons.length <= 1 ){
-      classes.push('fontsize')
+      classesArray.push(classes.fontsize)
      }
 
 
     return (
-      <StyleRoot>
-      <div className="App">
-        <h1 className={classes.join(' ')}>manoj reactjs developer</h1>
-        <button style={style} onClick={this.ToggleName.bind(this,'mamamamamam')}>Toggle Name</button>
+      <div className={classes.App}>
+        <h1 className={classesArray.join(' ')}>manoj reactjs developer</h1>
+        <button className={buttonClass} onClick={this.ToggleName.bind(this,'mamamamamam')}>Toggle Name</button>
         {persons}
                
       </div>
-      </StyleRoot>
     );
   }
 }
 
-export default Radium(App);
+export default App;
